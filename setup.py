@@ -37,7 +37,7 @@ setup(
     include_package_data=True,
     keywords='atkinson',
     name='atkinson',
-    packages=find_packages(include=['atkinson']),
+    packages=find_packages(include=['atkinson.*']),
     setup_requires=setup_requirements,
     test_suite='tests',
     tests_require=test_requirements,
