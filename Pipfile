@@ -5,10 +5,11 @@ name = "pypi"
 
 [dev-packages]
 pytest = "*"
+pytest-datadir = "*"
 coverage = "*"
 sphinx-autobuild = "*"
 sphinx_rtd_theme = "*"
 Sphinx = "*"
 
 [packages]
-
+pyyaml = "*"

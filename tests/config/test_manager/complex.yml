@@ -1,0 +1,12 @@
+---
+
+my_option:
+  setting1: True
+  setting2: False
+  setting_list:
+    - 1
+    - 2
+  nested:
+    more_nested:
+      even_more_nested: False
+  extra: True
