@@ -8,8 +8,9 @@ Welcome to atkinson's documentation!
    readme
    installation
    usage
-   modules
+   source/modules
    contributing
+   authors
    history
 
 Indices and tables
