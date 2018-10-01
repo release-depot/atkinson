@@ -6,5 +6,8 @@ name = "pypi"
 [dev-packages]
 pytest = "< 3.7"
 coverage = "*"
+sphinx-rtd-theme = "*"
+sphinx = "*"
+sphinx-autobuild = "*"
 
 [packages]
