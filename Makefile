@@ -70,7 +70,7 @@ coverage: ## check code coverage quickly with the default Python
 docs: ## generate Sphinx HTML documentation, including API docs
 	rm -f docs/atkinson.rst
 	rm -f docs/modules.rst
-	pipenv run sphinx-apidoc -o docs/ atkinson
+	pipenv run sphinx-apidoc -o docs/source atkinson
 	$(MAKE) -C docs clean
 	$(MAKE) -C docs html
 	$(BROWSER) docs/_build/html/index.html
