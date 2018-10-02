@@ -16,8 +16,8 @@ def _check_available(filename):   # pragma: no cover
     """
     Check to see if the filename exists and is a file
 
-    :param filename: str A fully qualified path and file
-    :returns: Boolean
+        :param filename: str A fully qualified path and file
+        :returns: Boolean
     """
     return os.path.exists(filename) and os.path.isfile(filename)
 
@@ -26,8 +26,8 @@ def config_search_paths(override_list=None):
     """
     Generate a list of paths to search for config files
 
-    :param override_list: A list for string path to use as a override location Default: None
-    :returns: generator function of search paths.
+        :param override_list: A list for string path to use as a override location Default: None
+        :returns: generator function of search paths.
     """
     for default in DEFAULT_CONFIG_PATHS:
         yield default
@@ -44,12 +44,12 @@ def get_config_files(filenames=None, overrides=None, add_defaults=True):
     """
     Search for filename, or return the default config file
 
-    :param filenames: list or string of file names to search for Default: None
-    :param overrides: list of string of paths to use for searching Default: None
-    :param add_defaults: Boolean Control if the default file name (config.yml) is added
-    to the search
+        :param filenames: list or string of file names to search for Default: None
+        :param overrides: list of string of paths to use for searching Default: None
+        :param add_defaults: Boolean Control if the default file name (config.yml) is added
+                             to the search
 
-    :returns: generator function of available config files
+        :returns: generator function of available config files
     """
     file_names = []
     if add_defaults is True:
