@@ -11,11 +11,7 @@ with open('README.rst') as readme_file:
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
-requirements = []
-
-setup_requirements = ['pytest-runner', ]
-
-test_requirements = ['pytest', 'flake8']
+TEST_REQUIRES = ['pytest', 'pytest-datadir', 'coverage']
 
 setup(
     author="Jason Joyce",
@@ -31,16 +27,18 @@ setup(
         'Programming Language :: Python :: 3.6',
     ],
     description="Python based release manager.",
-    install_requires=requirements,
+    setup_requires=['pytest-runner'],
+    install_requires=['pyyaml==3.13'],
+    tests_require=TEST_REQUIRES,
+    extras_require={'docs': ['sphinx', 'sphinx-autobuild', 'sphinx-rtd-theme'],
+                    'test': TEST_REQUIRES},
     license="MIT license",
     long_description=readme + '\n\n' + history,
     include_package_data=True,
     keywords='atkinson',
     name='atkinson',
     packages=find_packages(include=['atkinson.*']),
-    setup_requires=setup_requirements,
     test_suite='tests',
-    tests_require=test_requirements,
     url='https://github.com/release-depot/atkinson',
     version='0.0.1',
     zip_safe=False,

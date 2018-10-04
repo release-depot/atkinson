@@ -4,10 +4,11 @@ verify_ssl = true
 name = "pypi"
 
 [dev-packages]
-pytest = "< 3.7"
+pytest = "*"
 coverage = "*"
-sphinx-rtd-theme = "*"
-sphinx = "*"
 sphinx-autobuild = "*"
+sphinx_rtd_theme = "*"
+Sphinx = "*"
 
 [packages]
+
