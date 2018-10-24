@@ -5,9 +5,10 @@
 
 import os
 
+from unittest.mock import patch
+
 import pytest
 
-from unittest.mock import patch
 from atkinson.config import search
 
 
@@ -24,7 +25,8 @@ class CheckAvailMock(object):
 
 def test_config_path_no_override():
     """Test we only get our paths"""
-    assert list(search.config_search_paths()) == list(search.DEFAULT_CONFIG_PATHS)
+    expected = list(search.DEFAULT_CONFIG_PATHS)
+    assert list(search.config_search_paths()) == expected
 
 
 def test_cofig_path_override():
@@ -59,16 +61,17 @@ def test_default_returned_all():
     """Test config returned from ~/.atkinson"""
     with patch('atkinson.config.search._check_available') as aval_mock:
         aval_mock.return_value = True
-        expected = [os.path.join(x, 'config.yml') for x in search.DEFAULT_CONFIG_PATHS]
+        expected = [os.path.join(x, 'config.yml')
+                    for x in search.DEFAULT_CONFIG_PATHS]
         assert list(search.get_config_files()) == expected
 
 
-@pytest.mark.parametrize('expected', [os.path.realpath('./configs/config.yml'),
-                                      '/etc/atkinson/config.yml',
-                                      os.path.expanduser('~/.atkinson/config.yml')])
-def test_default_slots(expected):
+@pytest.mark.parametrize('expected_path', list(search.DEFAULT_CONFIG_PATHS))
+def test_default_slots(expected_path):
     """Test config returned from each default path individually"""
     with patch('atkinson.config.search._check_available') as aval_mock:
+        file_name = 'config.yml'
+        expected = os.path.join(expected_path, file_name)
         check = CheckAvailMock(expected)
         aval_mock.side_effect = check.check
         assert list(search.get_config_files()) == [expected]
@@ -104,14 +107,18 @@ def test_default_override():
 
 
 def test_default_override_not_found():
-    """Test an override is given but the file is not found. Fall back to the defaults."""
+    """Test an override is given but the file is not found.
+       Fall back to the defaults.
+    """
     with patch('atkinson.config.search._check_available') as aval_mock:
         my_overrides = ['~/my_config_dir']
         file_name = 'config.yml'
-        expected = [os.path.join(os.path.expanduser(x), file_name) for x in my_overrides]
+        expected = [os.path.join(os.path.expanduser(x), file_name)
+                    for x in my_overrides]
         check = CheckAvailMock(expected)
         aval_mock.side_effect = check.check
-        assert list(search.get_config_files(overrides=my_overrides)) == expected
+        actual = list(search.get_config_files(overrides=my_overrides))
+        assert actual == expected
 
 
 def test_default_second_override():
@@ -119,10 +126,12 @@ def test_default_second_override():
     with patch('atkinson.config.search._check_available') as aval_mock:
         my_overrides = ['~/my_config_dir', '~/my_second_configs']
         file_name = 'config.yml'
-        expected = [os.path.join(os.path.expanduser(x), file_name) for x in my_overrides]
+        expected = [os.path.join(os.path.expanduser(x), file_name)
+                    for x in my_overrides]
         check = CheckAvailMock(expected)
         aval_mock.side_effect = check.check
-        assert list(search.get_config_files(overrides=my_overrides)) == expected
+        actual = list(search.get_config_files(overrides=my_overrides))
+        assert actual == expected
 
 
 def test_several_confs_no_override():
@@ -143,14 +152,19 @@ def test_several_confs_mix_override():
         expected = ['/etc/atkinson/configB.yml', '/opt/configs/configA.yml']
         check = CheckAvailMock(expected)
         aval_mock.side_effect = check.check
-        assert list(search.get_config_files(filenames=file_names, overrides=override)) == expected
+        actual = list(search.get_config_files(filenames=file_names,
+                                              overrides=override))
+        assert actual == expected
 
 
 def test_override_extra_defaults():
-    """Test an extra filename, override and default filename returns the correct order"""
+    """Test an extra filename, override and default filename
+       returns the correct order"""
     with patch('atkinson.config.search._check_available') as aval_mock:
         override = '/opt/configs'
         expected = ['/opt/configs/config.yml', '/opt/configs/extra.yml']
         check = CheckAvailMock(expected)
         aval_mock.side_effect = check.check
-        assert list(search.get_config_files(filenames='extra.yml', overrides=override)) == expected
+        actual = list(search.get_config_files(filenames='extra.yml',
+                                              overrides=override))
+        assert actual == expected
