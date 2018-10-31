@@ -1,0 +1,15 @@
+commits:
+- commit_branch: master
+  commit_hash: 1c087246c4a31bec1124acde610731c884c435f1
+  distgit_dir: /home/centos-master-uc/data/python-networking-l2gw_distro/
+  distro_hash: 44eea44aaa02e9d314c0288788254a9f316c5772
+  dt_build: '1541157889'
+  dt_commit: '1541157342.0'
+  dt_distro: '1535033997'
+  flags: '0'
+  id: '61971'
+  notes: OK
+  project_name: python-networking-l2gw
+  repo_dir: /home/centos-master-uc/data/python-networking-l2gw
+  rpms: repos/1c/08/1c087246c4a31bec1124acde610731c884c435f1_44eea44a/python-networking-l2gw-13.0.1-0.20181102112457.1c08724.el7.src.rpm,repos/1c/08/1c087246c4a31bec1124acde610731c884c435f1_44eea44a/openstack-neutron-l2gw-agent-13.0.1-0.20181102112457.1c08724.el7.noarch.rpm,repos/1c/08/1c087246c4a31bec1124acde610731c884c435f1_44eea44a/python-networking-l2gw-tests-13.0.1-0.20181102112457.1c08724.el7.noarch.rpm,repos/1c/08/1c087246c4a31bec1124acde610731c884c435f1_44eea44a/python-networking-l2gw-doc-13.0.1-0.20181102112457.1c08724.el7.noarch.rpm,repos/1c/08/1c087246c4a31bec1124acde610731c884c435f1_44eea44a/python2-networking-l2gw-13.0.1-0.20181102112457.1c08724.el7.noarch.rpm
+  status: SUCCESS

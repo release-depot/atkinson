@@ -1,0 +1,4 @@
+---
+tester:
+  url: 'http://testhost'
+  release: 'test'
