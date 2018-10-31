@@ -11,7 +11,8 @@ with open('README.rst') as readme_file:
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
-TEST_REQUIRES = ['pytest', 'pytest-datadir', 'coverage']
+TEST_REQUIRES = ['pytest', 'pytest-datadir',
+                 'coverage', 'requests-mock']
 
 setup(
     author="Jason Joyce",
@@ -27,7 +28,7 @@ setup(
     ],
     description="Python based release manager.",
     setup_requires=['pytest-runner'],
-    install_requires=['toolchest>=0.0.4'],
+    install_requires=['toolchest>=0.0.4', 'requests'],
     tests_require=TEST_REQUIRES,
     extras_require={'docs': ['sphinx', 'sphinx-autobuild', 'sphinx-rtd-theme'],
                     'test': TEST_REQUIRES},

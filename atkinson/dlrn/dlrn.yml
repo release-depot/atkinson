@@ -1,0 +1,4 @@
+---
+rdo:
+  url: 'https://trunk.rdoproject.org'
+  release: centos7-master

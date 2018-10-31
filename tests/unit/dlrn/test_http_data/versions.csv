@@ -1,0 +1,2 @@
+Project,Source Repo,Source Sha,Dist Repo,Dist Sha,Status,Last Success Timestamp,Pkg NVR
+test-project,https://github.com/release-depot/test-project.git,abc123,https://github.com/release-depot/test-project-distgit.git,zxy987,SUCCESS,1541991102,test-project-1.0.el7
