@@ -27,7 +27,7 @@ setup(
     ],
     description="Python based release manager.",
     setup_requires=['pytest-runner'],
-    install_requires=['pyyaml==3.13'],
+    install_requires=['toolchest>=0.0.4'],
     tests_require=TEST_REQUIRES,
     extras_require={'docs': ['sphinx', 'sphinx-autobuild', 'sphinx-rtd-theme'],
                     'test': TEST_REQUIRES},

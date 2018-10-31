@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 """Module for loading/accessing config data"""
 
-import yaml
+from toolchest import yaml
 
 from atkinson.config.search import get_config_files
 
@@ -47,7 +47,7 @@ class ConfigManager():
         :param filename: The fully qualified path to load and parse
         """
         with open(filename, 'r') as file_handle:
-            data = yaml.safe_load(file_handle.read())
+            data = yaml.parse(file_handle.read())
             self.config_data = _update(self._config_data, data)
             self._config_files.append(filename)
 
