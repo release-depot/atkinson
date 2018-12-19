@@ -64,11 +64,16 @@ Ready to contribute? Here's how to set up `atkinson` for local development.
 
     $ git clone git@github.com:your_name_here/atkinson.git
 
-3. Use pipenv via the Makefile to setup a new virtualenv. Pipenv will create a new virtualenv with packages at the correct versions.
-   Assuming you have pipenv installed, this is how you set up your fork for local development::
+3. Use pipenv via the Makefile to setup a new virtualenv. Pipenv will create a new virtualenv with packages at the correct versions.::
 
-    $ make dev
-    $ pipenv shell
+    $ mkvirtualenv atkinson
+    $ cd atkinson
+    $ python setup.py develop
+
+3a. Alternatively, feel free to use pipenv if you prefer::
+
+    $ pipenv --three
+    $ pipenv install --dev
 
 4. Create a branch for local development::
 
