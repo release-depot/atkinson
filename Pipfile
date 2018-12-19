@@ -4,14 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [dev-packages]
-pytest = "*"
-pytest-datadir = "*"
-coverage = "*"
-sphinx-autobuild = "*"
-sphinx_rtd_theme = "*"
-Sphinx = "*"
-requests-mock = "*"
+atkinson = {path = ".", extras = ["docs", "test"], editable = true}
 
 [packages]
-toolchest = ">=0.0.4"
-requests = "*"
+atkinson = {path = ".", editable = true}
