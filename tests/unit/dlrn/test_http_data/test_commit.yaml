@@ -1,0 +1,15 @@
+commits:
+- commit_branch: master
+  commit_hash: abc123
+  distgit_dir: /home/test/data/test-package
+  distro_hash: zxy987
+  dt_build: '1541157889'
+  dt_commit: '1541157342.0'
+  dt_distro: '1535033997'
+  flags: '0'
+  id: '61971'
+  notes: OK
+  project_name: test-package
+  repo_dir: /home/test/data/test-package
+  rpms: 'test-package.rpm'
+  status: SUCCESS
