@@ -136,7 +136,7 @@ class DlrnHttpData():
         second = self._commit_data['commit_hash'][2:4]
         third = self._commit_data['commit_hash']
         for key in ['dist_hash', 'extended_hash']:
-            if self._commit_data.get(key):
+            if self._commit_data.get(key, 'None') != 'None':
                 third += '_' + self._commit_data[key][0:8]
         return os.path.join(self.url,
                             first,
