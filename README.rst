@@ -40,6 +40,7 @@ atkinson uses the upcoming standard of Pipfiles via pipenv.  This is integrated
 into our Makefile and once you have the above dependencies, you can simply run::
 
   make dev
+
 This will install our dev environment for the package via pipenv.  It is installed
 with --user, so it does not affect your site-packages.  Pipenv creates a unique virtualenv
 for us, which you can activate via::
