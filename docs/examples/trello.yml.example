@@ -1,0 +1,8 @@
+---
+
+# Your api key can be found at https://trello.com/app-key
+api_key: <your api_key>
+# You can generate a token from the app-key url as well.
+token: <your token>
+# This can be found by exporting the boad as json and looking for the id.
+board_id: <target board id>

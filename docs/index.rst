@@ -9,6 +9,7 @@ Welcome to atkinson's documentation!
    installation
    usage
    source/modules
+   examples
    contributing
    authors
    history

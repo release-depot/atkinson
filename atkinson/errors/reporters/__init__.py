@@ -15,9 +15,9 @@ class BaseReport(ABC):
         """
         Create a new report and return a report object
 
-        :param title: A title for the report (str)
-        :param description: Description for the report (str)
-        :param config: Configuration information for the report (dict)
+        :param str title: A title for the report
+        :param str description: Description for the report
+        :param dict config: Configuration information for the report
         """
 
     @classmethod
@@ -26,8 +26,8 @@ class BaseReport(ABC):
         """
         Get a current report object by ID
 
-        :param report_id: The ID for the report (str)
-        :param config: Configuration information for the report (dict)
+        :param str report_id: The ID for the report
+        :param dict config: Configuration information for the report
         """
 
     @property
