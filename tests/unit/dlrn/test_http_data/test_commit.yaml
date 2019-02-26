@@ -3,6 +3,7 @@ commits:
   commit_hash: abc123
   distgit_dir: /home/test/data/test-package
   distro_hash: zxy987
+  extended_hash: 'None'
   dt_build: '1541157889'
   dt_commit: '1541157342.0'
   dt_distro: '1535033997'
