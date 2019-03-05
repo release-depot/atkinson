@@ -11,6 +11,7 @@ class GenericReporter(BaseReport):
     def __init__(self, title, logger):
         """
         Class constructor
+
         :param logger: The logger to use
         """
         self.__title = title
@@ -20,6 +21,7 @@ class GenericReporter(BaseReport):
     def new(cls, title, description, config):
         """
         Create a new report
+
         :param title: The title for the report
         :param description: A description for the report
         :param config: Configuration dictionary for the report
@@ -33,6 +35,7 @@ class GenericReporter(BaseReport):
     def get(cls, report_id, config):
         """
         Retrieve an active report
+
         :param report_id: The unique id (the report title) for the report
         :param config: Configuration dictionary for the report
         :return: A LoggingReporter instance
@@ -49,6 +52,7 @@ class GenericReporter(BaseReport):
     def update(self, **kwargs):
         """
         Update the report
+
         :param kwargs: A dictionary of named arguments to report
         """
         if self.__log:
