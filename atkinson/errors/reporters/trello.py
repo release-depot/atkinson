@@ -137,7 +137,7 @@ class TrelloCard(BaseReport):
     def _markdown_to_tuple(self, markdown):
         """ Extract a tuple for a markdown formatted link """
         if markdown.find('[') != -1:
-            match = re.search(r'\[(.+)\]\((.+)\)', markdown)
+            match = re.search(r'\[(.+)\]\((.*)\)', markdown)
             if match:
                 return (match.group(1), match.group(2))
         else:
