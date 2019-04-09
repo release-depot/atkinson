@@ -210,6 +210,38 @@ def test_update_checklist_url_no_match(get_api):
     assert kwargs == {}
 
 
+def test_update_checklist_no_url(get_api):
+    """
+    Given we have a TrelloCard instance
+    When we call update
+    And the checklist item's url is missing
+    And the checklist kwarg is available with only one checklist item left
+    Then the missing checklist item is marked complete.
+    """
+    api_mock = get_api
+    api_mock.cards.get.return_value = {'idChecklists': ['checklist_id'],
+                                       'id': 'card_id'}
+    api_mock.cards.rename_checkItem.return_value = True
+
+    checklist_ret = {'checkItems': [{'name': '[a]()',
+                                     'id': '1234',
+                                     'state': 'incomplete'}],
+                     'name': 'TestList', 'id': 'checklist_id'}
+    api_mock.checklists.get.return_value = checklist_ret
+
+    card = get_instance(api_mock)
+    card.update(checklist={'TestList': [{'name': 'a',
+                                         'link': 'https://failing/a2'}]})
+    assert api_mock.cards.get.called
+    assert api_mock.checklists.get.called
+    assert not api_mock.checklists.new_checkItem.called
+    assert not api_mock.cards.uncheck_checkItem.called
+    assert api_mock.cards.rename_checkItem.called
+    args, kwargs = api_mock.cards.rename_checkItem.call_args
+    assert args == ('card_id', '1234', '[a](https://failing/a2)')
+    assert kwargs == {}
+
+
 def test_update_checklist_incomplete(get_api):
     """
     Given we have a TrelloCard instance
