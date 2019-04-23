@@ -3,12 +3,14 @@
 
 import os.path
 
+from contextlib import ExitStack
+
 import requests_mock
 
 from atkinson.dlrn.http_data import DlrnHttpData, dlrn_http_factory
 
 
-def test_factory_bad_connnection(datadir):
+def test_factory_bad_connection(datadir):
     """
     Given we have a valid config file
     When we call the factory function
@@ -196,3 +198,55 @@ def test_extend_hash_version(datadir):
                      status_code=200)
             dlrn = dlrn_http_factory('tester', config_file=config_file)
             assert expected == dlrn.versions
+
+
+def test_get_failures_one_failed(datadir):
+    """
+    GIVEN we have a DlrnHttpData instance and a status report
+    AND the report show errors
+    WHEN we call get_failures
+    THEN we get a dictionary of packages and their links
+    """
+    config_file = os.path.join(datadir, 'config.yml')
+    filenames = [os.path.join(datadir, 'failing_status_report.csv'),
+                 os.path.join(datadir, 'test_commit.yaml')]
+    root_path = 'http://testhost/test'
+    octa = '30/a4/30a4feb820baa04a5a2a1b7f65f80688e8238604_b28bb910_ec7270a0'
+    ooo = 'ee/ee/eeee6fb90a6c85e13256cc41ac14ae976fd9797e_3e454909_32a32880'
+
+    with ExitStack() as stack:
+        files = [stack.enter_context(open(fname)) for fname in filenames]
+        with requests_mock.Mocker() as mock:
+            mock.get(f"{root_path}/status_report.csv",
+                     text=files[0].read(), status_code=200)
+            mock.get(f"{root_path}/link_name/commit.yaml",
+                     text=files[1].read(),
+                     status_code=200)
+
+            expected = {'openstack-octavia': f"{root_path}/{octa}",
+                        'openstack-tripleo-common': f"{root_path}/{ooo}"}
+            dlrn = dlrn_http_factory('tester', config_file=config_file)
+            assert dlrn.get_failures() == expected
+
+
+def test_get_failures_no_failed(datadir):
+    """
+    GIVEN we have a DlrnHttpData instance and a status report
+    AND the status report does not show any errors
+    WHEN we call get_failures
+    THEN we get an empty dictionary
+    """
+    config_file = os.path.join(datadir, 'config.yml')
+    filenames = [os.path.join(datadir, 'good_status_report.csv'),
+                 os.path.join(datadir, 'test_commit.yaml')]
+    with ExitStack() as stack:
+        files = [stack.enter_context(open(fname)) for fname in filenames]
+        with requests_mock.Mocker() as mock:
+            mock.get('http://testhost/test/status_report.csv',
+                     text=files[0].read(), status_code=200)
+            mock.get('http://testhost/test/link_name/commit.yaml',
+                     text=files[1].read(),
+                     status_code=200)
+
+            dlrn = dlrn_http_factory('tester', config_file=config_file)
+            assert dlrn.get_failures() == {}
