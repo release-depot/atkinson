@@ -332,6 +332,7 @@ def test_close_empty(get_api):
     api_mock = get_api
     api_mock.cards.get.return_value = {'idList': '123', 'id': 'card_id'}
     api_mock.cards.update_idList.return_value = True
+    api_mock.cards.update_pos.return_value = True
 
     api_mock.checklists.get.return_value = {}
 
@@ -339,6 +340,7 @@ def test_close_empty(get_api):
     card.close()
     assert not api_mock.cards.check_checkItem.called
     assert api_mock.cards.update_idList.called
+    assert api_mock.cards.update_pos.called
 
 
 def test_close_complete_items(get_api):
@@ -361,6 +363,7 @@ def test_close_complete_items(get_api):
                                      'state': 'incomplete'}],
                      'name': 'TestList', 'id': 'checklist_id'}
     api_mock.checklists.get.return_value = checklist_ret
+    api_mock.cards.update_pos.return_value = True
 
     card = get_instance(api_mock)
     card.close()
@@ -368,3 +371,4 @@ def test_close_complete_items(get_api):
     call_list = api_mock.cards.check_checkItem.call_args_list
     assert call_list == [call('card_id', '1234'), call('card_id', '5678')]
     assert api_mock.cards.update_idList.called
+    assert api_mock.cards.update_pos.called

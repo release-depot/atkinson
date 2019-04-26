@@ -239,3 +239,4 @@ class TrelloCard(BaseReport):
         if current_column != self.__close_column:
             self.__api.cards.update_idList(self.__card_id,
                                            self.__close_column)
+            self.__api.cards.update_pos(self.__card_id, 'bottom')
