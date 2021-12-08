@@ -1,0 +1,8 @@
+---
+
+build_sources:
+        koji-tag-1:
+                - http://localhost/1
+                - http://localhost/1.1
+        koji-tag-2:
+                - http://localhost/2
